@@ -1,1 +1,1 @@
-<?php header('location:src/view/main') ?>
+<?php header('location:src/view/auth/login.php') ?>

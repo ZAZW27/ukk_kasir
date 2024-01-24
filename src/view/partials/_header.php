@@ -1,4 +1,15 @@
-<?php include '../../config.php' ?>
+<?php include '../../config.php';
+
+session_start();
+
+if ($_SESSION['nama'] == ''){
+    header('location:../auth/login.php');
+}
+
+$name = $_SESSION['nama'];
+$level = $_SESSION['level'];
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -36,21 +47,21 @@
             </div>
             <div class="w-full md:w-[40vw] h-[3rem] bg-emerald-400 flex items-center" style="pointer-events: all;">
                 <ul class="flex justify-evenly items-center w-full text-white text-md">
-                    <li>
+                    <li class="<?= $level == 'administrator' ? '' : 'hidden'?>">
                         <a href="#" class="px-3 py-2">
                             <span class="border-transparent px-1 border-b-2 hover:border-white hover:font-medium transition-all duration-300 ease-in-out">
                                 Log
                             </span>
                         </a>
                     </li>
-                    <li>
+                    <li class="<?= $level == 'kasir' ? '' : 'hidden'?>">
                         <a href="../main/index.php" class="px-3 py-2">
                             <span class="border-transparent px-1 border-b-2 hover:border-white hover:font-medium transition-all duration-300 ease-in-out">
                                 Transaction
                             </span>
                         </a>
                     </li>
-                    <li>
+                    <li class="<?= $level == 'petugas' ? '' : 'hidden'?>">
                         <a href="../items/index.php" class="px-3 py-2">
                             <span class="border-transparent px-1 border-b-2 hover:border-white hover:font-medium transition-all duration-300 ease-in-out">
                                 Items
@@ -58,9 +69,9 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="px-3 py-2">
+                        <a href="../auth/crud/logout.php" class="px-3 py-2">
                             <span class="border-transparent px-1 border-b-2 hover:border-white hover:font-medium transition-all duration-300 ease-in-out">
-                                Cashier
+                                Logout
                             </span>
                         </a>
                     </li>
