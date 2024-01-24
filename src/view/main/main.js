@@ -58,7 +58,7 @@ $(document).ready(function() {
                     <div id="actions" class="flex flex-col items-end justify-between pr-2">
                         <div id="subtotal-harga" class="flex flex-col items-end justify-start">
                             <span id="total-kali" class="total-kali">${formattedHarga}</span>
-                            <input type="text" id="subtotal-input" value="${formattedHarga}" name="subtotal_asli[]" hidden>
+                            <input type="text" id="subtotal-input" value="${harga}" name="subtotal[]" hidden>
                             <span id="harga-asli" class="text-[0.7rem] text-slate-500" >${formattedHarga}</span>
                         </div>
                         <div id="subtiture-btn" class="flex gap-2 font-bold items-center">
@@ -136,7 +136,7 @@ $(document).ready(function() {
         var formattedHarga = totalKali.toLocaleString('id-ID', { style: 'currency', currency: 'IDR' });
 
         subTotal.text(formattedHarga)
-        subTotalInput.val(formattedHarga)
+        subTotalInput.val(totalKali)
         updateTotalHarga()
     }
 
@@ -164,5 +164,6 @@ $(document).ready(function() {
         
         var formattedHarga = totalSum.toLocaleString('id-ID', { style: 'currency', currency: 'IDR' });
         $('#total-items').text(formattedHarga);
+        $('#total-items-input').val(totalSum.toString());
     }
 });

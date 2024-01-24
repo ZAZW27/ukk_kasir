@@ -27,7 +27,7 @@
         text-shadow: 0.4px 0.4px 8px rgba(6, 122, 66, 0.4);
     }
 </style>
-<body class="bg-slate-200/80 h-[200vh] overflow-x-clip">
+<body class="bg-slate-200/80 pb-20 overflow-x-clip">
     <header class="relative z-10">
         <nav class="w-full h-[100vh] md:h-[3rem] fixed z-11 top-0 left-0 flex flex-col md:flex-row justify-between" style="pointer-events: none;">
             <div class="w-full md:h-[3rem] h-[3.2rem] bg-emerald-400 flex items-center justify-between md:justify-start px-4 text-white font-extrabold" id="title-nav" style="pointer-events: all;">
@@ -44,14 +44,14 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="px-3 py-2">
+                        <a href="../main/index.php" class="px-3 py-2">
                             <span class="border-transparent px-1 border-b-2 hover:border-white hover:font-medium transition-all duration-300 ease-in-out">
                                 Transaction
                             </span>
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="px-3 py-2">
+                        <a href="../items/index.php" class="px-3 py-2">
                             <span class="border-transparent px-1 border-b-2 hover:border-white hover:font-medium transition-all duration-300 ease-in-out">
                                 Items
                             </span>

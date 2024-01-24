@@ -10,7 +10,7 @@
                 harga="<?=$item['Harga']?>"
                 image="<?=$item['image']?>"
 
-                class="h-44 bg-slate-200 shadow-md rounded-lg overflow-clip shadow-slate-700/10 bg-contain bg-no-repeat bg-center hover:scale-105 transition-all duration-50 ease-linear" 
+                class="h-44 bg-slate-100 shadow-md rounded-lg overflow-clip shadow-slate-700/10 bg-contain bg-no-repeat bg-center hover:scale-105 transition-all duration-50 ease-linear" 
                 style="background-image: url('../../../public/img/<?=$item['image']?>');">
                 <div id="item-add" class="w-full h-full bg-transparent hover:bg-slate-800/30 flex justify-center items-center text-transparent hover:text-white font-bold text-xl transition-all duration-300 ease-in-out">
                     <span style="pointer-events: none;">ADD</span>
@@ -19,7 +19,7 @@
         <?php } ?>
     </div>
     <div id="cart-modal" class="col-span-1 px-4 md:px-0 flex items-center justify-center md:block bg-slate-700/40 md:bg-transparent fixed md:relative h-[100vh] w-[100vw] md:w-auto top-[0] md:top-0 left-[100vw] md:left-0 md:h-full transition-all duration-300 ease-in-out">
-        <form method="POST" action="crud/aksi-transaksi.php" class="md:sticky top-[4rem] p-4 h-[80vh] w-full bg-slate-100 rounded-lg flex flex-col justify-between shadow-slate-500/20">
+        <form method="POST" action="crud/aksi-transaksi.php" class="md:sticky top-[4rem] p-4 h-[80vh] w-full bg-white rounded-lg flex flex-col justify-between shadow-slate-500/20">
             <div class="h-[70vh] w-full overflow-y-auto flex flex-col justify-start items-center ">
                 <h1 class="font-bold text-teal-500 text-xl mb-2">Item Cart</h1>
                 <div id="items-section" class="flex flex-col w-full h-full">
@@ -50,31 +50,66 @@
                 </div>
             </div>
             <div id="action-btn" class="w-full  flex justify-between items-center font-semibold">
-                <div id="total-harga">Total:<span id="total-items">-</span></div>
-                <button type="submit" class="bg-green-400 font-semibold rounded-md px-4 py-1 text-white shadow-md shadow-slate-500/10">Deliver</button>
+                <div id="total-harga">Total:<span id="total-items">-</span><input type="text" name="total-items" id="total-items-input" hidden></div>
+                <button id="next-trans" type="button" class="bg-sky-400 font-semibold rounded-md px-4 py-1 text-white shadow-md shadow-slate-500/10">Next</button>
             </div>
-            <div class="fixed top-[3.2rem] md:top-0 left-0 w-full h-full bg-slate-800/30 pointer-events-none flex justify-center items-start md:items-center px-4 py-2 md:py-0 ">
+            <div id="pelanggan-modal" class="fixed top-[3.2rem] md:top-0 left-0 w-full h-full bg-slate-800/30 pointer-events-none hidden justify-center items-start md:items-center px-4 py-2 md:py-0 ">
                 <div class="pointer-events-auto w-full md:w-[40vw] bg-slate-100 px-4 py-2 flex flex-col justify-center items-center rounded-lg">
                     <h1 class="text-2xl text-emerald-400 font-bold">Pelanggan</h1>
                     <div class="my-2 flex flex-col w-9/12">
                         <label for="">Nomor pelanggan</label>
                         <input id="nomor-pelanggan" type="number" name="nomor_pelanggan" placeholder="+62 000-000-000" class="w-[12rem] bg-transparent border-b-2 border-slate-800 focus:outline-none px-2">
                     </div>
-                    <script>
-                        $('#nomor-pelanggan').on('change', function(){
-                            var nomorPelanggan = $(this).val();
-                            // Check if the length is greater than 9
-                            if (nomorPelanggan.length > 9) {
-
-                            }
-                        })
-                    </script>
-                    <div id="nama-pelanggan" class="my-2 flex flex-col w-9/12">
-                        <label for="">Nama Pelanggan</label>
-                        <input type="text" name="nomor_pelanggan" placeholder="Pelanggan baru, masukkan nama" class=" bg-transparent border-b-2 border-slate-800 focus:outline-none px-2">
+                    <div id="pelanggan-info" class="flex flex-col w-full items-center justify-center">
+                        <div id="nama-pelanggan" class="my-2 flex flex-col w-9/12">
+                            <label for="">Nama Pelanggan</label>
+                            <input type="text" name="nama_pelanggan" placeholder="Pelanggan baru, masukkan nama" class=" bg-transparent border-b-2 border-slate-800 focus:outline-none px-2">
+                        </div>
+                        <div id="nama-pelanggan" class="my-2 flex flex-col w-9/12">
+                            <label for="">Alamat Pelanggan</label>
+                            <input type="text" name="alamat_pengguna" placeholder="JL Soekarno Hatta" class=" bg-transparent border-b-2 border-slate-800 focus:outline-none px-2">
+                        </div>
+                    </div>
+                    <div class="flex justify-between md:justify-around w-full m-4">
+                        <!-- <button class="bg-red-500 font-bold text-xl text-white px-4 rounded-md self-start">Back</button> -->
+                        <button id="back-trans" type="button" class="bg-red-500 font-semibold rounded-md px-4 py-1 text-white shadow-md shadow-slate-500/10">Back</button>
+                        <button type="submit" class="bg-green-400 font-semibold rounded-md px-4 py-1 text-white shadow-md shadow-slate-500/10">Registre</button>
                     </div>
                 </div>
             </div>
+            <script>
+                var pelangganToggle = false
+                $('#next-trans').on('click', function () {
+                    pelangganToggle = !pelangganToggle
+                    togglePelanggan()
+                })
+                $('#back-trans').on('click', function () {
+                    pelangganToggle = !pelangganToggle
+                    togglePelanggan()
+                })
+                function togglePelanggan(){
+                    if (pelangganToggle) {
+                        $('#pelanggan-modal').addClass('flex').removeClass('hidden')
+                    }else{
+                        $('#pelanggan-modal').removeClass('flex').addClass('hidden')
+                    }
+                }
+                $('#nomor-pelanggan').on('change', function(){
+                    var nomorPelanggan = $(this).val();
+                    // Check if the length is greater than 9
+                    if (nomorPelanggan.length > 3) {
+                        $.ajax({
+                            type: 'POST',
+                            dataType: "html",
+                            url: "crud/get-pelanggan.php",
+                            data: {nomor: nomorPelanggan}, 
+                            success: function(msg){
+                                $('#pelanggan-info').html(msg)
+                            }
+                        })
+                    }
+                })
+            </script>
         </form>
     </div>
 </section>
