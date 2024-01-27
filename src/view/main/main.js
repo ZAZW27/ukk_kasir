@@ -6,16 +6,22 @@ $(document).ready(function() {
     $(document).off('click', '#delete-item').on('click', '#delete-item', deleteItem);
     $(document).off('change', '#item-quantity').on('change', '#item-quantity', InvalidQuantity);
 
-    console.log('jquery ready')
     var chartBool = false
-    $('#look-cart').click(function () {
+    $('#look-cart').click(toggleCart)
+    $('#hide-cart').click(toggleCart)
+    
+    function toggleCart(){
         chartBool = !chartBool
+        console.log(chartBool)
         if (chartBool) {
             $('#cart-modal').removeClass('left-[100vw]').addClass('left-0');
+            $('#search-bar').removeClass('z-10').addClass('z-9')
         }else{
             $('#cart-modal').addClass('left-[100vw]').removeClass('left-0');
+            $('#search-bar').addClass('z-10').removeClass('z-9')
         }
-    })
+
+    }
 
     $(document).off('click', '#item-shop').on('click', '#item-shop', function() {
         var id = $(this).attr('idProduk');
@@ -40,12 +46,12 @@ $(document).ready(function() {
 
         var formattedHarga = harga.toLocaleString('id-ID', { style: 'currency', currency: 'IDR' });
 
-        $(this).removeClass('hover:scale-105').addClass('hover:scale-80')
+        $(this).removeClass('hover:scale-105 duration-300').addClass('hover:scale-80 duration-50')
 
         $('#items-section').append(`
             <section id="item" class="item">
-                <div class="w-full flex justify-between my-2">
-                    <div id="menu-cart">
+                <div class="w-full flex justify-between">
+                    <div id="menu-cart" class="flex">
                         <div class="w-[4.5rem] h-[4.5rem] bg-contain bg-center flex justify-start items-start overflow-clip bg-slate-200 rounded-md" style="background-image: url('../../../public/img/${image}')">
                             <button type="button" id="delete-item" class="w-5 h-5 bg-red-500 text-white font-bold text-center text-xs">x</button>
                         </div>
@@ -53,7 +59,7 @@ $(document).ready(function() {
                         <input type="text" value="${image}" name="image[]" hidden>
                         <input type="text" value="${nama}" name="nama_produk[]" hidden>
                         <input type="text" value="${formattedHarga}" name="harga_asli[]" hidden>
-                        <h1 class="nama_barang">${nama}</h1>
+                        <h1 class="nama_barang px-2 font-semibold text-slate-800">${nama}</h1>
                     </div>
                     <div id="actions" class="flex flex-col items-end justify-between pr-2">
                         <div id="subtotal-harga" class="flex flex-col items-end justify-start">
@@ -62,20 +68,20 @@ $(document).ready(function() {
                             <span id="harga-asli" class="text-[0.7rem] text-slate-500" >${formattedHarga}</span>
                         </div>
                         <div id="subtiture-btn" class="flex gap-2 font-bold items-center">
-                            <button type="button" id="sub-quantity" class="border-2 border-red-600 w-6 h-6 text-center rounded-md">-</button>
-                            <input name="quantitas[]" value="1" id="item-quantity" class="border border-slate-800 rounded-md w-8 bg-transparent text-center font-medium" type="text" >
-                            <button type="button" id="add-quantity" class="border-2 border-green-600 w-6 h-6 text-center rounded-md">+</button>
+                            <button type="button" id="sub-quantity" class="border-2 border-red-600 w-5 h-5 flex items-center justify-center rounded-md">-</button>
+                            <input name="quantitas[]" value="1" id="item-quantity" class="border border-amber-900 rounded-md w-10 h-5 bg-transparent text-center font-medium" type="text" >
+                            <button type="button" id="add-quantity" class="border-2 border-green-600 w-5 h-5 flex items-center justify-center rounded-md">+</button>
                         </div>
                     </div>
                 </div>
-                <hr class="border border-slate-400 my-2">
+                <hr class="border border-slate-400 my-1">
             </section>
         `)
         updateTotalHarga()
         // console.log($('.item').length)
         setTimeout(() => {
-            $(this).addClass('hover:scale-105').removeClass('hover:scale-80');
-        }, 200);
+            $(this).addClass('hover:scale-105 duration-300').removeClass('hover:scale-80 duration-50');
+        }, 100);
     });
 
     function InvalidQuantity() {
@@ -166,4 +172,13 @@ $(document).ready(function() {
         $('#total-items').text(formattedHarga);
         $('#total-items-input').val(totalSum.toString());
     }
+
+    // $('#search-item').on('change', searchItem);
+
+    // function searchItem(){
+    //     var searchValue = $(this).val();
+
+    //     console.log(searchValue)
+    // }
+
 });
