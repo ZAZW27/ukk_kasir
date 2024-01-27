@@ -19,7 +19,6 @@
             </div>
             <div class="flex gap-4">
                 <input type="text" placeholder="Cari item" id="search-item" class="border-b-2 border-amber-400 shadow-inner rounded-md focus:outline-none focus:ring-0 px-2 font-medium text-base">
-                <button class="btn">Cari</button>
             </div>
         </div>
     </section>
