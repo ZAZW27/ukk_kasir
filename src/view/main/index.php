@@ -1,9 +1,9 @@
 <?php include '../partials/_header.php' ?>
+<button id="look-cart" class="btn block md:hidden fixed z-[100] top-[0.6rem] right-[0.5rem] bg-emerald-400 text-white font-semibold shadow-md shadow-green-400/20 px-3 rounded-md py-0.5">Cart</button>
 <div class="relative z-1w-full top-[3.4rem] left-0 flex flex-col justify-center items-center px-2">
-    <section id="search-bar" class="w-full md:sticky top-[3.4rem] z-10 md:w-[90vw] m-6 bg-white rounded-xl shadow-xl shadow-slate-400/20 flex flex-wrap justify-between gap-4 font-bold px-2 md:px-12 py-4">
+    <section id="search-bar" class="w-full top-[3.4rem] md:w-[90vw] m-6 bg-white rounded-xl shadow-xl shadow-slate-400/20 flex flex-wrap justify-between gap-4 font-bold px-2 md:px-12 py-4">
         <div class="flex w-full md:w-[30vw] justify-between items-center">
             <h1 class="text-emerald-700 text-2xl md:text-4xl btn">Transaks<span class="text-red-600">i</span></h1>
-            <button id="look-cart" class="btn block md:hidden bg-emerald-400 text-white font-semibold shadow-md shadow-green-400/20 px-3 rounded-md py-0.5">Cart</button>
         </div>
         <div class="flex flex-col md:flex-row gap-4">
             <div class="flex gap-2">
@@ -111,9 +111,13 @@
                     <div id="total-harga">Total:<span id="total-items">-</span><input type="text" name="total-items" id="total-items-input" hidden></div>
                     <button id="next-trans" type="button" class="bg-sky-400 font-semibold rounded-md px-4 py-1 text-white shadow-md shadow-slate-500/10">Next</button>
                 </div>
-                <div id="pelanggan-modal" class="fixed top-[3.2rem] md:top-0 left-0 w-full h-full bg-slate-800/30 pointer-events-none hidden transition-all duration-300 justify-center items-start md:items-center px-4 py-2 md:py-0 ">
-                    <div class="pointer-events-auto w-full md:w-[40vw] bg-slate-100 px-4 py-2 flex flex-col justify-center items-center rounded-lg">
-                        <h1 class="text-2xl text-emerald-400 font-bold">Pelanggan</h1>
+                <div id="pelanggan-modal" class="fixed top-[3.2rem] md:top-0 left-0 w-full h-full bg-slate-800/30 pointer-events-none flex opacity-0 transition-all duration-300 ease-linear justify-center items-start md:items-center px-4 py-2 md:py-0 ">
+                    <div id="pelanggan-form" class="w-full md:w-[40vw] bg-white scale-0 transition-all duration-200 ease-in-out px-1 md:px-4 py-2 flex flex-col justify-center items-center rounded-lg">
+                        <div class="">
+                            <svg class="absolute z-8 -ml-[0.1rem] opacity-40" width="4rem" height="4rem" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path fill-rule="evenodd" clip-rule="evenodd" d="M16.5 7.063C16.5 10.258 14.57 13 12 13c-2.572 0-4.5-2.742-4.5-5.938C7.5 3.868 9.16 2 12 2s4.5 1.867 4.5 5.063zM4.102 20.142C4.487 20.6 6.145 22 12 22c5.855 0 7.512-1.4 7.898-1.857a.416.416 0 0 0 .09-.317C19.9 18.944 19.106 15 12 15s-7.9 3.944-7.989 4.826a.416.416 0 0 0 .091.317z" 
+                            fill="#dc2626"></path></g></svg>
+                            <h1 class="text-2xl relative z-9 text-emerald-700 font-bold mt-[1.8rem] border-b-[0.3rem] rounded-md border-amber-400">Pelanggan</h1>
+                        </div>
                         <div class="my-2 flex flex-col w-9/12">
                             <label for="">Nomor pelanggan</label>
                             <input required id="nomor-pelanggan" type="number" name="nomor_pelanggan" placeholder="+62 000-000-000" class="w-[12rem] bg-transparent border-b-2 border-slate-800 focus:outline-none px-2">
@@ -126,6 +130,9 @@
                             <div id="nama-pelanggan" class="my-2 flex flex-col w-9/12">
                                 <label for="">Alamat Pelanggan</label>
                                 <input required type="text" name="alamat_pengguna" placeholder="JL Soekarno Hatta" class=" bg-transparent border-b-2 border-slate-800 focus:outline-none px-2">
+                            </div>
+                            <div class="flex items-center justify-start w-full flex-wrap px-2 md:px-12 leading-4">
+                                Diskon Member: <div id="harga-asli-cart" class="text-slate-500 line-through text-xs">Rp. 7.000.000</div><div id="harga-diskon" class="text-red-500 font-semibold">Rp. 5.000.000</div>
                             </div>
                         </div>
                         <div class="flex justify-between md:justify-around w-full m-4">
@@ -147,17 +154,26 @@
                     })
                     function togglePelanggan(){
                         if (pelangganToggle) {
-                            $('#pelanggan-modal').addClass('flex').removeClass('hidden')
-                            $('#search-bar').removeClass('z-10').addClass('z-9')
+                            $('#pelanggan-modal').addClass('opacity-100').removeClass('opacity-0').
+                            removeClass('pointer-events-none').addClass('pointer-events-auto')
+                            
+                            $('#pelanggan-form').removeClass('scale-0').addClass('scale-110');
+                            setTimeout(() => {
+                                $('#pelanggan-form').removeClass('scale-110').addClass('scale-100');
+                            }, 175);
                         }else{
-                            $('#pelanggan-modal').removeClass('flex').addClass('hidden')
-                            $('#search-bar').addClass('z-10').removeClass('z-9')
+                            $('#pelanggan-form').addClass('scale-0').removeClass('scale-100')
+
+                            setTimeout(() => {
+                                $('#pelanggan-modal').removeClass('opacity-100').addClass('opacity-0').
+                                addClass('pointer-events-none').removeClass('pointer-events-auto')
+                            }, 100);
                         }
                     }
-                    $('#nomor-pelanggan').on('change', function(){
+                    $('#nomor-pelanggan').on('input', function(){
                         var nomorPelanggan = $(this).val();
                         // Check if the length is greater than 9
-                        if (nomorPelanggan.length > 3) {
+                        if (nomorPelanggan.length > 10) {
                             $.ajax({
                                 type: 'POST',
                                 dataType: "html",

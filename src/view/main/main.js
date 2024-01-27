@@ -14,11 +14,12 @@ $(document).ready(function() {
         chartBool = !chartBool
         console.log(chartBool)
         if (chartBool) {
-            $('#cart-modal').removeClass('left-[100vw]').addClass('left-0');
-            $('#search-bar').removeClass('z-10').addClass('z-9')
+            $('#cart-modal').removeClass('left-[100vw]').addClass('-left-12');
+            setTimeout(() => {
+                $('#cart-modal').removeClass('-left-12').addClass('left-0');
+            }, 200);
         }else{
             $('#cart-modal').addClass('left-[100vw]').removeClass('left-0');
-            $('#search-bar').addClass('z-10').removeClass('z-9')
         }
 
     }
