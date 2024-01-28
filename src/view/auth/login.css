@@ -8,7 +8,8 @@
 }
 
 body {
-	background: linear-gradient(90deg, #a7f3d0, #34d399);		
+	/* background: linear-gradient(90deg, #a7f3d0,#14b8a6);		 */
+    background-color: #e0f2fe;
 }
 
 .container {
@@ -16,17 +17,18 @@ body {
 	align-items: center;
 	justify-content: center;
 	min-height: 100vh;
+	width: 100vw;
 }
 
 .screen {		
     backdrop-filter: blur(10px);
     border-radius: 10px;
     overflow: clip;
-	background: linear-gradient(90deg, #13b571, #2acc7d);
+	background: linear-gradient(90deg, #f8d05a, #f8d363);
 	position: relative;	
 	height: 600px;
 	width: 360px;	
-	box-shadow: 0px 0px 50px #24d5afdd;
+	box-shadow: 0px 0px 50px #035f6624;
 }
 
 .screen__content {
@@ -63,8 +65,7 @@ body {
 .screen__background__shape2 {
 	height: 220px;
 	width: 220px;
-	background: linear-gradient(20deg, #09965d, #1ec180);	
-    box-shadow: 0px 0px 30px #26e79aae;
+	background: #15c67f;	
 	top: -172px;
 	right: 0;	
 	border-radius: 32px;
@@ -73,7 +74,7 @@ body {
 .screen__background__shape3 {
 	height: 540px;
 	width: 190px;
-	background: linear-gradient(270deg, #09965d, #12ad6f);
+	background: linear-gradient(270deg, #08b972, #0bce80);
 	top: -24px;
 	right: 0;	
 	border-radius: 32px;
@@ -82,7 +83,7 @@ body {
 .screen__background__shape4 {
 	height: 400px;
 	width: 200px;
-	background: #059669;	
+	background: linear-gradient(-90deg, #08b57e , #0fc98e);	
 	top: 420px;
 	right: 50px;	
 	border-radius: 60px;
@@ -102,12 +103,12 @@ body {
 .login__icon {
 	position: absolute;
 	top: 30px;
-	color: #7875B5;
+	color: #049674;
 }
 
 .login__input {
 	border: none;
-	border-bottom: 2px solid #D1D1D4;
+	border-bottom: 2px solid #4cc47a;
 	background: none;
 	padding: 10px;
 	padding-left: 24px;
@@ -120,38 +121,43 @@ body {
 .login__input:focus,
 .login__input:hover {
 	outline: none;
-	border-bottom-color: #6A679E;
+	border-bottom-color: #05824e;
 }
 
 .login__submit {
+	overflow-x: hidden !important;
 	background: #fff;
 	font-size: 14px;
 	margin-top: 30px;
-	padding: 16px 20px;
+	padding: 10px 20px;
 	border-radius: 26px;
-	border: 1px solid #D4D3E8;
+	border: 1px solid #9cf3ce;
 	text-transform: uppercase;
 	font-weight: 700;
 	display: flex;
 	align-items: center;
 	width: 100%;
-	color: #4C489D;
-	box-shadow: 0px 2px 2px #5C5696;
+	color: #02834e;
+	box-shadow: 0px 2px 2px #02834e;
 	cursor: pointer;
 	transition: .2s;
+}
+
+#move-cart{
+	transition: 0.3s cubic-bezier(0.42, 0, 0.58, 1) ;
 }
 
 .login__submit:active,
 .login__submit:focus,
 .login__submit:hover {
-	border-color: #6A679E;
+	border-color: #02834e;
 	outline: none;
 }
 
 .button__icon {
 	font-size: 24px;
 	margin-left: auto;
-	color: #7875B5;
+	color: #02834e;
 }
 
 .social-login {	

@@ -131,9 +131,9 @@
                                 <label for="">Alamat Pelanggan</label>
                                 <input required type="text" name="alamat_pengguna" placeholder="JL Soekarno Hatta" class=" bg-transparent border-b-2 border-slate-800 focus:outline-none px-2">
                             </div>
-                            <div class="flex items-center justify-start w-full flex-wrap px-2 md:px-12 leading-4">
+                            <!-- <div class="flex items-center justify-start w-full flex-wrap px-2 md:px-12 leading-4">
                                 Diskon Member: <div id="harga-asli-cart" class="text-slate-500 line-through text-xs">Rp. 7.000.000</div><div id="harga-diskon" class="text-red-500 font-semibold">Rp. 5.000.000</div>
-                            </div>
+                            </div> -->
                         </div>
                         <div class="flex justify-between md:justify-around w-full m-4">
                             <!-- <button class="bg-red-500 font-bold text-xl text-white px-4 rounded-md self-start">Back</button> -->

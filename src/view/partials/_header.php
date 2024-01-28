@@ -47,9 +47,16 @@ $level = $_SESSION['level'];
             <div class="w-full md:w-[40vw] h-[3rem] bg-emerald-700 flex items-center" style="pointer-events: all;">
                 <ul class="flex justify-center items-center w-full text-white text-md">
                     <li class="<?= $level == 'administrator' ? '' : 'hidden'?>">
-                        <a href="#" class="px-3 py-2">
+                        <a href="../logging/index.php" class="px-3 py-2">
                             <span class="border-transparent px-1 border-b-2 hover:border-white hover:font-medium transition-all duration-300 ease-in-out">
                                 Log
+                            </span>
+                        </a>
+                    </li>
+                    <li class="<?= $level == 'administrator' ? '' : 'hidden'?>">
+                        <a href="../staff/index.php" class="px-3 py-2">
+                            <span class="border-transparent px-1 border-b-2 hover:border-white hover:font-medium transition-all duration-300 ease-in-out">
+                                Staff
                             </span>
                         </a>
                     </li>

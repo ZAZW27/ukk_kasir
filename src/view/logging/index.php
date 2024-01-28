@@ -1,7 +1,7 @@
 <?php include '../partials/_header.php' ?>
 <div class="flex justify-center items-start flex-wrap w-full relative top-[4rem] gap-4 px-2">
     <?php 
-    $getPembelian = mysqli_query($con, "SELECT * FROM penjualan INNER JOIN pelanggan ON penjualan.PelangganID = pelanggan.PelangganID");
+    $getPembelian = mysqli_query($con, "SELECT * FROM penjualan INNER JOIN pelanggan ON penjualan.PelangganID = pelanggan.PelangganID ORDER BY TanggalPenjualan DESC");
     while ($p = mysqli_fetch_array($getPembelian)) {
     ?>
         <section id="pembelian-container" class="w-full md:w-[22rem] flex flex-col bg-white p-2 shadow-lg shadow-slate-600/10 rounded-md">
