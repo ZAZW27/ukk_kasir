@@ -13,60 +13,78 @@
             <div class="col-md-12">
             <div class="table-container">
                 <table class="table">
-                <thead class="table__thead">
-                    <tr>
-                    <!-- <th class="table__th"><input name="" id="selectAll" type="checkbox" class="table__select-row"></th> -->
-                        <th class="table__th">Id</th>
-                        <th class="table__th">Nama pegawai</th>
-                        <th class="table__th">Bidang</th>
-                        <th class="table__th">Status</th>
-                        <th class="table__th">Action</th>
-                    </tr>
-                </thead>
-                <tbody class="table__tbody">
-                    <?php 
-                        $getKaryawan = mysqli_query($con, "SELECT * FROM user ORDER BY STATUS DESC");
-                        while ($p = mysqli_fetch_array($getKaryawan)) {
-                    ?>
-                        <tr class="table-row transition-all duration-50 ease-linear <?= $p['status'] == 1 ? '' : 'table-row--red' ?> ">
-                            <td class="table-row__td">
-                                <div class="<?= $p['status'] == 1 ? '' : 'table-row--overdue' ?>"></div>
-                                <p class="table-row__name"><?= $p['UserID'] ?></p>
-                            </td>
-                            <td class="table-row__td">
-                                <!-- <div class="table-row__img"></div>-->
-                                <div class="table-row__info"> 
-                                    <p class="table-row__name"><?= $p['Nama'] ?></p>
-                                    <span class="table-row__small"><?= $p['NamaUser'] ?></span>
-                                </div>
-                            </td>
-                            <td data-column="Bidang" class="table-row__td">
-                                <div class="">
-                                    <p class="table-row__policy"><?= $p['Level'] ?></p>
-                                </div>                
-                            </td>
-                            <td data-column="Status" class="table-row__td">
-                                <div class="">
-                                    <p class="table-row__policy"><?= $p['status'] == 1 ? 'Active' : 'Non-active' ?></p>
-                                </div>                
-                            </td>
-                            <td class="table-row__td">
-                                <button class="btn" id="update-modal" userid="<?=$p['UserID']?>">
-                                    <svg data-toggle="tooltip" data-placement="bottom" title="Edit" version="1.1" class="table-row__edit" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512.001 512.001" style="enable-background:new 0 0 512.001 512.001;" xml:space="preserve"><g>	<g>		<path d="M496.063,62.299l-46.396-46.4c-21.2-21.199-55.69-21.198-76.888,0l-18.16,18.161l123.284,123.294l18.16-18.161    C517.311,117.944,517.314,83.55,496.063,62.299z" style="fill: rgb(1, 185, 209);"></path>	</g></g><g>	<g>
-                                        <path d="M22.012,376.747L0.251,494.268c-0.899,4.857,0.649,9.846,4.142,13.339c3.497,3.497,8.487,5.042,13.338,4.143    l117.512-21.763L22.012,376.747z" style="fill: rgb(1, 185, 209);"></path>	</g></g><g>	<g>		<polygon points="333.407,55.274 38.198,350.506 161.482,473.799 456.691,178.568   " style="fill: rgb(1, 185, 209);"></polygon>	</g></g><g></g><g></g><g></g>
-                                        <g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g>
-                                    </svg>
-                                </button>
-                                <button class="btn" id="aksi-delete" userid="<?=$p['UserID']?>">
-                                    <svg data-toggle="tooltip" data-placement="bottom" title="Delete" version="1.1" class="table-row__bin" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve"><g>	<g>		<path d="M436,60h-90V45c0-24.813-20.187-45-45-45h-90c-24.813,0-45,20.187-45,45v15H76c-24.813,0-45,20.187-45,45v30    c0,8.284,6.716,15,15,15h16.183L88.57,470.945c0.003,0.043,0.007,0.086,0.011,0.129C90.703,494.406,109.97,512,133.396,512    h245.207c23.427,0,42.693-17.594,44.815-40.926c0.004-0.043,0.008-0.086,0.011-0.129L449.817,150H466c8.284,0,15-6.716,15-15v-30    C481,80.187,460.813,60,436,60z M196,45c0-8.271,6.729-15,15-15h90c8.271,0,15,6.729,15,15v15H196V45z M393.537,468.408    c-0.729,7.753-7.142,13.592-14.934,13.592H133.396c-7.792,0-14.204-5.839-14.934-13.592L92.284,150h327.432L393.537,468.408z     M451,120h-15H76H61v-15c0-8.271,6.729-15,15-15h105h150h105c8.271,0,15,6.729,15,15V120z" style="fill: rgb(158, 171, 180);"></path>	</g></g><g>	<g>		<path d="M256,180c-8.284,0-15,6.716-15,15v212c0,8.284,6.716,15,15,15s15-6.716,15-15V195C271,186.716,264.284,180,256,180z" style="fill: rgb(158, 171, 180);"></path>	</g></g><g>	<g>		<path d="M346,180c-8.284,0-15,6.716-15,15v212c0,8.284,6.716,15,15,15s15-6.716,15-15V195C361,186.716,354.284,180,346,180z" style="fill: rgb(158, 171, 180);"></path>	</g></g><g>	<g>		<path d="M166,180c-8.284,0-15,6.716-15,15v212c0,8.284,6.716,15,15,15s15-6.716,15-15V195C181,186.716,174.284,180,166,180z" style="fill: rgb(158, 171, 180);"></path>	</g></g><g></g><g></g><g></g><g></g><g></g><g></g>
-                                        <g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g>
-                                    </svg>                
-                                </button>
-                            </td>   
-                        </tr>                    
-                    <?php } ?>
-                </tbody>
+                    <thead class="table__thead">
+                        <tr>
+                        <!-- <th class="table__th"><input name="" id="selectAll" type="checkbox" class="table__select-row"></th> -->
+                            <th class="table__th">Id</th>
+                            <th class="table__th">Nama pegawai</th>
+                            <th class="table__th">Bidang</th>
+                            <th class="table__th">Status</th>
+                            <th class="table__th">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table__tbody">
+                        <?php 
+                            $getKaryawan = mysqli_query($con, "SELECT * FROM user ORDER BY STATUS DESC");
+                            while ($p = mysqli_fetch_array($getKaryawan)) {
+                        ?>
+                            <tr class="table-row transition-all duration-50 ease-linear <?= $p['status'] == 1 ? '' : 'table-row--red' ?> ">
+                                <td class="table-row__td">
+                                    <div class="<?= $p['status'] == 1 ? '' : 'table-row--overdue' ?>"></div>
+                                    <p class="table-row__name"><?= $p['UserID'] ?></p>
+                                </td>
+                                <td class="table-row__td">
+                                    <!-- <div class="table-row__img"></div>-->
+                                    <div class="table-row__info"> 
+                                        <p class="table-row__name"><?= $p['Nama'] ?></p>
+                                        <span class="table-row__small"><?= $p['NamaUser'] ?></span>
+                                    </div>
+                                </td>
+                                <td data-column="Bidang" class="table-row__td">
+                                    <div class="">
+                                        <p class="table-row__policy"><?= $p['Level'] ?></p>
+                                    </div>                
+                                </td>
+                                <td data-column="Status" class="table-row__td">
+                                    <div class="">
+                                        <p class="table-row__policy"><?= $p['status'] == 1 ? 'Active' : 'Non-active' ?></p>
+                                    </div>                
+                                </td>
+                                <td class="table-row__td flex justify-center items-center">
+                                    <button class="btn" id="update-modal" userid="<?=$p['UserID']?>">
+                                        <svg data-toggle="tooltip" data-placement="bottom" title="Edit" version="1.1" class="table-row__edit" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512.001 512.001" style="enable-background:new 0 0 512.001 512.001;" xml:space="preserve"><g>	<g>		<path d="M496.063,62.299l-46.396-46.4c-21.2-21.199-55.69-21.198-76.888,0l-18.16,18.161l123.284,123.294l18.16-18.161    C517.311,117.944,517.314,83.55,496.063,62.299z" style="fill: rgb(1, 185, 209);"></path>	</g></g><g>	<g>
+                                            <path d="M22.012,376.747L0.251,494.268c-0.899,4.857,0.649,9.846,4.142,13.339c3.497,3.497,8.487,5.042,13.338,4.143    l117.512-21.763L22.012,376.747z" style="fill: rgb(1, 185, 209);"></path>	</g></g><g>	<g>		<polygon points="333.407,55.274 38.198,350.506 161.482,473.799 456.691,178.568   " style="fill: rgb(1, 185, 209);"></polygon>	</g></g><g></g><g></g><g></g>
+                                            <g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g>
+                                        </svg>
+                                    </button>
+                                    <?php if ($p['status'] == 1) { ?>
+                                        <a href="#" class="btn" id="aksi-delete" onclick="confirmDeactivate('crud/aksi-nonaktif.php?id=<?=$p['UserID']?>')">
+                                            <svg data-toggle="tooltip" data-placement="bottom" title="Delete" version="1.1" class="table-row__bin" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve"><g>	<g>		<path d="M436,60h-90V45c0-24.813-20.187-45-45-45h-90c-24.813,0-45,20.187-45,45v15H76c-24.813,0-45,20.187-45,45v30    c0,8.284,6.716,15,15,15h16.183L88.57,470.945c0.003,0.043,0.007,0.086,0.011,0.129C90.703,494.406,109.97,512,133.396,512    h245.207c23.427,0,42.693-17.594,44.815-40.926c0.004-0.043,0.008-0.086,0.011-0.129L449.817,150H466c8.284,0,15-6.716,15-15v-30    C481,80.187,460.813,60,436,60z M196,45c0-8.271,6.729-15,15-15h90c8.271,0,15,6.729,15,15v15H196V45z M393.537,468.408    c-0.729,7.753-7.142,13.592-14.934,13.592H133.396c-7.792,0-14.204-5.839-14.934-13.592L92.284,150h327.432L393.537,468.408z     M451,120h-15H76H61v-15c0-8.271,6.729-15,15-15h105h150h105c8.271,0,15,6.729,15,15V120z" style="fill: rgb(158, 171, 180);"></path>	</g></g><g>	<g>		<path d="M256,180c-8.284,0-15,6.716-15,15v212c0,8.284,6.716,15,15,15s15-6.716,15-15V195C271,186.716,264.284,180,256,180z" style="fill: rgb(158, 171, 180);"></path>	</g></g><g>	<g>		<path d="M346,180c-8.284,0-15,6.716-15,15v212c0,8.284,6.716,15,15,15s15-6.716,15-15V195C361,186.716,354.284,180,346,180z" style="fill: rgb(158, 171, 180);"></path>	</g></g><g>	<g>		<path d="M166,180c-8.284,0-15,6.716-15,15v212c0,8.284,6.716,15,15,15s15-6.716,15-15V195C181,186.716,174.284,180,166,180z" style="fill: rgb(158, 171, 180);"></path>	</g></g><g></g><g></g><g></g><g></g><g></g><g></g>
+                                                <g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g>
+                                            </svg>                
+                                        </a>
+                                    <?php }else{ ?>
+                                        <a href="#" onclick="confirmReactivate('crud/aksi-aktif.php?id=<?=$p['UserID']?>')">
+                                            <svg class="table-row__bin" width="1rem" height="1rem" viewBox="-2 0 24 24" id="meteor-icon-kit__solid-undo" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path fill-rule="evenodd" clip-rule="evenodd" d="M5.62132 7L7.06066 8.43934C7.64645 9.02513 7.64645 9.97487 7.06066 10.5607C6.47487 11.1464 5.52513 11.1464 4.93934 10.5607L0.93934 6.56066C0.35355 5.97487 0.35355 5.02513 0.93934 4.43934L4.93934 0.43934C5.52513 -0.146447 6.47487 -0.146447 7.06066 0.43934C7.64645 1.02513 7.64645 1.97487 7.06066 2.56066L5.62132 4H10C15.5228 4 20 8.47715 20 14C20 19.5228 15.5228 24 10 24C4.47715 24 0 19.5228 0 14C0 13.1716 0.67157 12.5 1.5 12.5C2.32843 12.5 3 13.1716 3 14C3 17.866 6.13401 21 10 21C13.866 21 17 17.866 17 14C17 10.134 13.866 7 10 7H5.62132z" fill="#0063c7"></path></g></svg>
+                                        </a>
+                                    <?php } ?>
+                                </td>   
+                            </tr>                    
+                        <?php } ?>
+                    </tbody>
                 </table>
+                <script>
+                    function confirmDeactivate(url) {
+                        if (confirm("Anda yakin ingin mengeluarkan dia pegawai ini?")) {
+                            window.location.href = url;
+                        }
+                    }
+                    function confirmReactivate(url) {
+                        if (confirm("Anda yakin ingin mengembalikan pegawai ini?")) {
+                            window.location.href = url;
+                        }
+                    }
+                </script>
             </div>
             </div>
         </div>

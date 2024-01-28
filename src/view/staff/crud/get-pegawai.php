@@ -17,7 +17,7 @@ $user = mysqli_fetch_array($getUser);
     <input type="text" value="<?=$user['UserID']?>" name="id_user" hidden>
     <div class="input-form flex flex-col mt-1 w-[90%] ">
         <label for="">Nama pegawai</label>
-        <input value="<?= $user['Nama'] ?>" name="nama-pegawai" type="text" class="border-b-2 border-slate-700 focus:right-0 focus:outline-none bg-transparent">
+        <input value="<?= $user['Nama'] ?>" name="nama_pegawai" type="text" class="border-b-2 border-slate-700 focus:right-0 focus:outline-none bg-transparent">
     </div>
     <div class="input-form flex flex-col mt-1 w-[90%]">
         <label for="">Username</label>
