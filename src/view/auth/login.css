@@ -8,8 +8,10 @@
 }
 
 body {
-	/* background: linear-gradient(90deg, #a7f3d0,#14b8a6);		 */
-    background-color: #e0f2fe;
+    /* background-color: #e0f2fe; */
+	background-image: url('../../../public/bg/background1.jpg');
+	background-size: cover;
+	background-position: center;
 }
 
 .container {
@@ -18,6 +20,9 @@ body {
 	justify-content: center;
 	min-height: 100vh;
 	width: 100vw;
+	background-color: #4f72876a;
+	/* background-color: #3d5d716a; */
+	backdrop-filter: blur(5px);
 }
 
 .screen {		
@@ -28,7 +33,9 @@ body {
 	position: relative;	
 	height: 600px;
 	width: 360px;	
-	box-shadow: 0px 0px 50px #035f6624;
+	box-shadow: 0px 0px 60px #caf3e969;
+	/* box-shadow: 0px 0px 60px #c3f5e859; */
+	/* box-shadow: 0px 0px 50px #3d65702c; */
 }
 
 .screen__content {

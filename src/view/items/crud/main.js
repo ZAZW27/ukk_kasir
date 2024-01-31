@@ -9,10 +9,10 @@ $(document).ready(function() {
         var currentQuantity = parseInt(quantityInput.val(), 10);
     
         // Check if the current value is a valid number
-        if (!isNaN(currentQuantity) && currentQuantity > 0) {
+        if (!isNaN(currentQuantity) && currentQuantity >= 0) {
             var newQuantity = currentQuantity + 1;
-            if (newQuantity < 1) {
-                quantityInput.val(1)
+            if (newQuantity < 0) {
+                quantityInput.val(0)
             }else{
                 quantityInput.val(newQuantity);
                 
@@ -27,10 +27,10 @@ $(document).ready(function() {
         var currentQuantity = parseInt(quantityInput.val(), 10);
     
         // Check if the current value is a valid number
-        if (!isNaN(currentQuantity) && currentQuantity > 0) {
+        if (!isNaN(currentQuantity) && currentQuantity >= 0) {
             var newQuantity = currentQuantity - 1;
-            if (newQuantity < 1) {
-                quantityInput.val(1)
+            if (newQuantity < 0) {
+                quantityInput.val(0)
             }else{
                 quantityInput.val(newQuantity);
             }

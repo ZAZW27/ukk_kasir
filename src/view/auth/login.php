@@ -9,7 +9,7 @@
 </head>
 <body>
     <div class="container">
-        <img class="absolute h-28 md:h-20 z-[99] -mt-[35rem] md:-mt-[36rem] md:-rotate-[10deg] md:-ml-[19rem]" src="../../../public/logo/giant-logo.png" alt="">
+        <img class="absolute h-28 md:h-20 z-[99] pointer-events-none -mt-[35rem] md:-mt-[36rem] md:-rotate-[10deg] md:-ml-[19rem]" src="../../../public/logo/giant-logo.png" alt="">
         <div class="screen">
             <div class="screen__content">
                 <form class="login" action="crud/aksi-login.php" method="POST" onsubmit="return submitFormWithDelay(this);">

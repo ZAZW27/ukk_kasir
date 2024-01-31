@@ -10,8 +10,9 @@ if (isset($_FILES['gambar'])) {
         $nama = $_POST['nama'];
         $harga = $_POST['harga'];
         $stok = $_POST['stok'];
+        $jenis = $_POST['jenis'];
         
-        $tambahProduk = mysqli_query($con, "INSERT INTO produk (NamaProduk, Harga, Stok, image) VALUES ('$nama', '$harga', '$stok', '$gambar')");
+        $tambahProduk = mysqli_query($con, "INSERT INTO produk (NamaProduk, Harga, Stok, image, JenisProduk) VALUES ('$nama', '$harga', '$stok', '$gambar', '$jenis')");
 
         if ($tambahProduk) {
             echo "<script>alert('Berhasil menambah produk');window.location='../index.php'</script>";

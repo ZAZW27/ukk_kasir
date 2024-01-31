@@ -9,7 +9,9 @@
         ?>
         <section id="barang" class="col-span-1 ">
             <div class="flex justify-between items-center w-full px-2 md:px-1 lg:px-4 py-2 border-b-4 bg-white rounded-lg shadow-lg shadow-slate-500/10 border-slate-300">
-                <div class="w-32 h-32 md:w-24 md:h-24 lg:w-[8vw] lg:h-[8vw] bg-center bg-slate-100 rounded-xl bg-contain bg-no-repeat" style="background-image: url('../../../public/img/<?=$i['image']?>');"></div>
+                <div class="w-32 h-32 md:w-24 md:h-24 lg:w-[8vw] lg:h-[8vw] bg-center overflow-clip bg-slate-100 rounded-xl bg-contain bg-no-repeat" style="background-image: url('../../../public/img/<?=$i['image']?>');">
+                    <a href="#" onclick="confirmDelete(<?=$i['ProdukID']?>)" class="relative top-0 left-0 bg-red-500 text-white px-2 btn" style="border-radius: 0 0 10px 0;">X</a>
+                </div>
                 <div id="information" class="flex flex-col justify-between items-end py-1">
                     <div id="info" class="flex flex-col justify-between items-end">
                         <h1 class="text-lg font-semibold text-end"><?= $i['NamaProduk'] ?></h1>
@@ -35,21 +37,45 @@
         <?php } ?>
     </div>
 </section>
+<script>
+    function confirmDelete(produkID) {
+        var confirmation = confirm("Are you sure you want to delete this item?");
+        if (confirmation) {
+            // If the user confirms, redirect to the delete URL
+            window.location.href = 'crud/request-delete.php?id=' + produkID;
+        } else {
+            // If the user cancels, do nothing
+            return false;
+        }
+    }
+</script>
 <section id="modal" class="bg-slate-900/20 fixed top-0 left-0 w-[100vw] h-[100vh] flex hidden flex-col justify-center items-center">
     <div class="bg-white p-4 w-full md:w-[40rem] mx-2 flex flex-col justify-center items-center">
         <h1 class="text-2xl font-bold text-emerald-400 mb-2">Tambah Produk</h1>
         <form action="crud/aksi-tambah.php" enctype="multipart/form-data" method="POST" class="flex flex-col items-center justify-center w-full">
             <div id="inputForm" class="flex flex-col w-11/12">
                 <label for="">Nama Barang</label>
-                <input type="text" name="nama" class=" bg-transparent border-b-2 border-slate-700 focus:outline-none px-2">
+                <input required type="text" name="nama" class=" bg-transparent border-b-2 border-slate-700 focus:outline-none px-2">
             </div>
             <div id="inputForm" class="flex flex-col w-11/12">
                 <label for="">Harga Barang</label>
-                <input type="text" name="harga" class=" bg-transparent border-b-2 border-slate-700 focus:outline-none px-2">
+                <input required type="text" name="harga" class=" bg-transparent border-b-2 border-slate-700 focus:outline-none px-2">
             </div>
             <div id="inputForm" class="flex flex-col w-11/12">
                 <label for="">Stock Barang</label>
                 <input type="text" name="stok" class=" bg-transparent border-b-2 border-slate-700 focus:outline-none px-2">
+            </div>
+            <div id="inputForm" class="flex flex-col w-11/12">
+                <label for="">Jenis Barang</label>
+                <select name="jenis" required class=" bg-transparent border-b-2 border-slate-700 focus:outline-none px-2">
+                    <option value="">Pilih jenis</option>
+                    <?php 
+                    $query = mysqli_query($con, "SELECT JenisProduk FROM produk GROUP BY JenisProduk");
+                    while ($jenis = mysqli_fetch_array($query)['JenisProduk']){
+                    ?>
+                    <option value="<?=$jenis?>"><?= $jenis ?></option>
+                    <?php } ?>
+                </select>
             </div>
             <div id="inputForm" class="flex flex-col w-11/12">
                 <label for="">Gambar Barang</label>
